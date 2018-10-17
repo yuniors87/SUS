@@ -1,0 +1,13 @@
+# import * from './generated/prisma.graphql'
+type Mutation {
+  createClient(
+    name: String
+    shortName: String
+    image: String
+    largeImage: String
+  ): Client!
+}
+
+type Query {
+  clients: [Client]!
+}

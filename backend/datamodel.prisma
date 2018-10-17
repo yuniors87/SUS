@@ -1,0 +1,13 @@
+type User {
+  id: ID! @unique
+  name: String!
+  email: String!
+}
+
+type Client {
+  id: ID! @unique
+  name: String!
+  shortName: String!
+  image: String
+  largeImage: String
+}
