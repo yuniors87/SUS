@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
+import PropTypes from 'prop-types';
 import Header from './Header';
 import Meta from './Meta';
 
@@ -8,7 +9,7 @@ const theme = {
   yellow: '#ffbf25',
   black: '#272b3a',
   maxWidth: '1000px',
-  bs: '0 12px 24px 0 rgba(0, 0, 0, 0.09)'
+  bs: '0 12px 24px 0 rgba(0, 0, 0, 0.09)',
 };
 
 const StyledPage = styled.div`
@@ -49,13 +50,14 @@ const GlobalStyle = createGlobalStyle`
 `;
 class Page extends React.Component {
   render() {
+    const { children } = this.props;
     return (
       <ThemeProvider theme={theme}>
         <StyledPage>
           <GlobalStyle />
           <Meta />
           <Header />
-          <Inner>{this.props.children}</Inner>
+          <Inner>{children}</Inner>
         </StyledPage>
       </ThemeProvider>
     );
@@ -63,3 +65,6 @@ class Page extends React.Component {
 }
 
 export default Page;
+Page.propTypes = {
+  children: PropTypes.element.isRequired,
+};
