@@ -1,0 +1,2 @@
+npm i -D eslint eslint-plugin-prettier babel-eslint eslint-plugin-react eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-import prettier
+npm install --save-dev eslint-config-prettier
