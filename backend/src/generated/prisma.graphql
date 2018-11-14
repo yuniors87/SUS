@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/alberto-jrs-mariscal-6dc770/sus-develop/dev
-# timestamp: Tue Oct 16 2018 22:42:40 GMT-0400 (STD)
+# timestamp: Tue Nov 13 2018 22:42:48 GMT-0400 (STD)
 
 type AggregateClient {
   count: Int!
@@ -18,8 +18,7 @@ type Client implements Node {
   id: ID!
   name: String!
   shortName: String!
-  image: String
-  largeImage: String
+  state: Int!
 }
 
 """A connection to a list of items."""
@@ -35,8 +34,7 @@ type ClientConnection {
 input ClientCreateInput {
   name: String!
   shortName: String!
-  image: String
-  largeImage: String
+  state: Int!
 }
 
 """An edge in a connection."""
@@ -55,10 +53,8 @@ enum ClientOrderByInput {
   name_DESC
   shortName_ASC
   shortName_DESC
-  image_ASC
-  image_DESC
-  largeImage_ASC
-  largeImage_DESC
+  state_ASC
+  state_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -69,8 +65,7 @@ type ClientPreviousValues {
   id: ID!
   name: String!
   shortName: String!
-  image: String
-  largeImage: String
+  state: Int!
 }
 
 type ClientSubscriptionPayload {
@@ -115,8 +110,13 @@ input ClientSubscriptionWhereInput {
 input ClientUpdateInput {
   name: String
   shortName: String
-  image: String
-  largeImage: String
+  state: Int
+}
+
+input ClientUpdateManyMutationInput {
+  name: String
+  shortName: String
+  state: Int
 }
 
 input ClientWhereInput {
@@ -248,86 +248,28 @@ input ClientWhereInput {
 
   """All values not ending with the given string."""
   shortName_not_ends_with: String
-  image: String
+  state: Int
 
   """All values that are not equal to given value."""
-  image_not: String
+  state_not: Int
 
   """All values that are contained in given list."""
-  image_in: [String!]
+  state_in: [Int!]
 
   """All values that are not contained in given list."""
-  image_not_in: [String!]
+  state_not_in: [Int!]
 
   """All values less than the given value."""
-  image_lt: String
+  state_lt: Int
 
   """All values less than or equal the given value."""
-  image_lte: String
+  state_lte: Int
 
   """All values greater than the given value."""
-  image_gt: String
+  state_gt: Int
 
   """All values greater than or equal the given value."""
-  image_gte: String
-
-  """All values containing the given string."""
-  image_contains: String
-
-  """All values not containing the given string."""
-  image_not_contains: String
-
-  """All values starting with the given string."""
-  image_starts_with: String
-
-  """All values not starting with the given string."""
-  image_not_starts_with: String
-
-  """All values ending with the given string."""
-  image_ends_with: String
-
-  """All values not ending with the given string."""
-  image_not_ends_with: String
-  largeImage: String
-
-  """All values that are not equal to given value."""
-  largeImage_not: String
-
-  """All values that are contained in given list."""
-  largeImage_in: [String!]
-
-  """All values that are not contained in given list."""
-  largeImage_not_in: [String!]
-
-  """All values less than the given value."""
-  largeImage_lt: String
-
-  """All values less than or equal the given value."""
-  largeImage_lte: String
-
-  """All values greater than the given value."""
-  largeImage_gt: String
-
-  """All values greater than or equal the given value."""
-  largeImage_gte: String
-
-  """All values containing the given string."""
-  largeImage_contains: String
-
-  """All values not containing the given string."""
-  largeImage_not_contains: String
-
-  """All values starting with the given string."""
-  largeImage_starts_with: String
-
-  """All values not starting with the given string."""
-  largeImage_not_starts_with: String
-
-  """All values ending with the given string."""
-  largeImage_ends_with: String
-
-  """All values not ending with the given string."""
-  largeImage_not_ends_with: String
+  state_gte: Int
 }
 
 input ClientWhereUniqueInput {
@@ -349,8 +291,8 @@ type Mutation {
   deleteClient(where: ClientWhereUniqueInput!): Client
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertClient(where: ClientWhereUniqueInput!, create: ClientCreateInput!, update: ClientUpdateInput!): Client!
-  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
-  updateManyClients(data: ClientUpdateInput!, where: ClientWhereInput): BatchPayload!
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateManyClients(data: ClientUpdateManyMutationInput!, where: ClientWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyClients(where: ClientWhereInput): BatchPayload!
 }
@@ -491,6 +433,11 @@ input UserSubscriptionWhereInput {
 }
 
 input UserUpdateInput {
+  name: String
+  email: String
+}
+
+input UserUpdateManyMutationInput {
   name: String
   email: String
 }

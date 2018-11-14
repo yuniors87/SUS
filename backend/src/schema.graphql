@@ -1,13 +1,19 @@
 # import * from './generated/prisma.graphql'
 type Mutation {
   createClient(
-    name: String
-    shortName: String
-    image: String
-    largeImage: String
+    name: String,
+    shortName: String,
+    state: Int
+  ): Client!
+  updateClient (
+    id: ID!,
+    name: String,
+    shortName: String,
+    state: Int
   ): Client!
 }
 
 type Query {
   clients: [Client]!
+  client(where: ClientWhereUniqueInput!): Client
 }

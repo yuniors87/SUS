@@ -1,7 +1,3 @@
-const Client = () => (
-  <div>
-    <p>Clientes!</p>
-  </div>
-);
+import Home from './index';
 
-export default Client;
+export default Home;

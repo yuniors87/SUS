@@ -1,6 +1,8 @@
+import Clients from '../components/Client/Clients';
+
 const Home = () => (
   <div>
-    <p>Hola</p>
+    <Clients />
   </div>
 );
 

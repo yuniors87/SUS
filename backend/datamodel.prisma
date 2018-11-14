@@ -8,6 +8,5 @@ type Client {
   id: ID! @unique
   name: String!
   shortName: String!
-  image: String
-  largeImage: String
+  state: Int!
 }
