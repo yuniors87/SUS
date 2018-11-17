@@ -15,22 +15,24 @@ Router.onRouteChangeError = () => {
 };
 
 const Logo = styled.h1`
-  font-size: 4rem;
-  margin: auto 0;
-  margin-left: 2rem;
+  margin: 0;
   position: relative;
   z-index: 2;
+  background: ${props => props.theme.red};
+  display: flex;
+  align-items: center;
   a {
-    border-radius: 5px;
     padding: 0.5rem 1rem;
-    background: ${props => props.theme.red};
+    padding-left: 2rem;
     color: white;
     text-transform: uppercase;
     text-decoration: none;
   }
   @media (max-width: 1300px) {
+    padding: 0.5rem;
     margin: 0;
     text-align: center;
+    line-height: 1.2;
   }
 `;
 const StyledHeader = styled.header`
@@ -44,11 +46,6 @@ const StyledHeader = styled.header`
       grid-template-columns: 1fr;
       justify-content: center;
     }
-  }
-  .sub-bar {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    border-bottom: 1px solid ${props => props.theme.yellow};
   }
 `;
 

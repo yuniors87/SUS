@@ -13,7 +13,7 @@ const Mutations = {
   updateClient(parent, args, ctx, info) {
     const updates = { ...args };
     delete updates.id;
-    return ctx.db.mutation.uodateClient(
+    return ctx.db.mutation.updateClient(
       {
         data: updates,
         where: {

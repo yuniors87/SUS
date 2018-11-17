@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Router from 'next/router';
+import PageWrapper from '../UI/PageWrapper';
 import Form from '../styles/Form';
 import Error from '../ErrorMessage';
 
@@ -35,59 +36,60 @@ class CreateClient extends Component {
     return (
       <Mutation mutation={CREATE_CLIENT_MUTATION} variables={this.state}>
         {(createClient, { loading, error }) => (
-          <Form
-            onSubmit={async e => {
-              e.preventDefault();
-              const res = await createClient();
-              Router.push({
-                pathname: '/client2',
-                query: { id: res.data.createClient.id },
-              });
-            }}
-          >
-            <h2>Registro de Cliente</h2>
-            <Error error={error} />
-            <fieldset disabled={loading} aria-busy={loading}>
-              <label htmlFor="name">
-                Nombre
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  placeholder="Nombre"
-                  required
-                  value={name}
-                  onChange={this.handleChange}
-                />
-              </label>
-              <label htmlFor="shortName">
-                Nombre Corto
-                <input
-                  type="text"
-                  name="shortName"
-                  id="shortName"
-                  placeholder="Nombre Corto"
-                  required
-                  value={shortName}
-                  onChange={this.handleChange}
-                />
-              </label>
-              <label htmlFor="state">
-                Estado
-                <select
-                  required
-                  name="state"
-                  id="state"
-                  value={state}
-                  onChange={this.handleChange}
-                >
-                  <option value="1">Activo</option>
-                  <option value="2">Inactivo</option>
-                </select>
-              </label>
-              <button type="submit">Guardar 💾</button>
-            </fieldset>
-          </Form>
+          <PageWrapper title="Registro de cliente">
+            <Form
+              onSubmit={async e => {
+                e.preventDefault();
+                const res = await createClient();
+                Router.push({
+                  pathname: '/clientUpdate',
+                  query: { id: res.data.createClient.id },
+                });
+              }}
+            >
+              <Error error={error} />
+              <fieldset disabled={loading} aria-busy={loading}>
+                <label htmlFor="name">
+                  Nombre
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    placeholder="Nombre"
+                    required
+                    value={name}
+                    onChange={this.handleChange}
+                  />
+                </label>
+                <label htmlFor="shortName">
+                  Nombre Corto
+                  <input
+                    type="text"
+                    name="shortName"
+                    id="shortName"
+                    placeholder="Nombre Corto"
+                    required
+                    value={shortName}
+                    onChange={this.handleChange}
+                  />
+                </label>
+                <label htmlFor="state">
+                  Estado
+                  <select
+                    required
+                    name="state"
+                    id="state"
+                    value={state}
+                    onChange={this.handleChange}
+                  >
+                    <option value="1">Activo</option>
+                    <option value="2">Inactivo</option>
+                  </select>
+                </label>
+                <button type="submit">Guardar 💾</button>
+              </fieldset>
+            </Form>
+          </PageWrapper>
         )}
       </Mutation>
     );

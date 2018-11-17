@@ -3,6 +3,7 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import Link from 'next/link';
 import styled from 'styled-components';
+import PageWrapper from '../UI/PageWrapper';
 import Client from './Client';
 
 const ALL_CLIENTS_QUERY = gql`
@@ -31,25 +32,26 @@ const StyledClient = styled.div`
 class Clients extends Component {
   render() {
     return (
-      <Center>
-        <h2>Clientes</h2>
-        <Link href="client">
-          <a>Nuevo</a>
-        </Link>
-        <Query query={ALL_CLIENTS_QUERY}>
-          {({ data, error, loading }) => {
-            if (loading) return <p>Loading...</p>;
-            if (error) return <p>Error: {error.message}</p>;
-            return (
-              <StyledClient>
-                {data.clients.map(client => (
-                  <Client client={client} key={client.id} />
-                ))}
-              </StyledClient>
-            );
-          }}
-        </Query>
-      </Center>
+      <PageWrapper title="Clientes registrados">
+        <Center>
+          <Link href="client">
+            <a>Nuevo</a>
+          </Link>
+          <Query query={ALL_CLIENTS_QUERY}>
+            {({ data, error, loading }) => {
+              if (loading) return <p>Loading...</p>;
+              if (error) return <p>Error: {error.message}</p>;
+              return (
+                <StyledClient>
+                  {data.clients.map(client => (
+                    <Client client={client} key={client.id} />
+                  ))}
+                </StyledClient>
+              );
+            }}
+          </Query>
+        </Center>
+      </PageWrapper>
     );
   }
 }

@@ -41,7 +41,7 @@ export default class Client extends Component {
       <StyledClient state={client.state}>
         <Link
           href={{
-            pathname: '/client',
+            pathname: '/clientUpdate',
             query: { id: client.id },
           }}
         >
